@@ -108,7 +108,7 @@ export default function NonprofitLookupPage() {
       const dataUrl = `data:image/png;base64,${badgeData.imageBase64}`;
       setBadgeUrl(dataUrl);
 
-      sessionStorage.setItem("badgeImageUrl", badgeData.imageUrl);
+      sessionStorage.setItem("badgeImageUrl", dataUrl);
 
       const nonprofits = selected.map((n) => ({ name: n.name, ein: n.ein }));
 
