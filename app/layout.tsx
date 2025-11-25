@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Benevolent Badge",
+  description: "Share your non profit interests",
 };
 
 export default function RootLayout({
