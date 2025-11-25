@@ -32,8 +32,12 @@ export async function POST(req: Request) {
       `,
       size: "1024x1024"
     });
-
+    if (!imgRes || !imgRes.data || !imgRes.data.length || !imgRes.data[0].b64_json) {
+      throw new Error("Image generation failed: No data returned from OpenAI.");
+    }
+    const base64 = imgRes.data[0].b64_json!;
     const base64data = imgRes.data[0].b64_json;
+    
     if (!base64data) throw new Error("No image returned");
 
     // Convert to Buffer
