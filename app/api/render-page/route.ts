@@ -92,9 +92,9 @@ NO other fields.
     const cardBg = cardBgForText(textColor);
 
     const finalHTML = `
-<main class="w-full p-10">
+<main class="w-full">
   <img id="badge-image"
-       class="w-48 h-48 rounded-full shadow-2xl mx-auto border-4 bg-white/80"
+       class="w-36 h-36 rounded-full shadow-2xl mx-auto border-4 bg-white/80"
        style="box-shadow: 0 4px 20px rgba(0,0,0,0.25);" />
 
   <h1 style="
