@@ -10,32 +10,55 @@ export async function POST(req: Request) {
     const { nonprofits } = await req.json();
 
     if (!nonprofits || nonprofits.length === 0) {
-      return NextResponse.json({ error: "No nonprofits provided." }, { status: 400 });
+      return NextResponse.json(
+        { error: "No nonprofits provided." },
+        { status: 400 }
+      );
     }
 
     const prompt = `
-      Give 5 fun titles for someone who donates to the following nonprofits.  Incorporate all of them into the title:
+      Create 5 creative, fun, uplifting honorary titles inspired by donations to:
       ${nonprofits.join(", ")}.
-      Do not include explanations.
+
+      RULES:
+      - No punctuation (NO quotes, commas, dashes, or colons).
+      - Titles must be short (2–6 words).
+      - No explanations, just the list.
+      - No numbering.
+      - Each title must be unique.
     `;
 
     const completion = await client.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "Respond concisely with low verbosity." },
+        { role: "system", content: "Respond ONLY with 5 raw title lines. No punctuation. No quotes." },
         { role: "user", content: prompt }
-      ]
+      ],
+      max_tokens: 100
     });
 
-    const text = completion.choices[0].message.content || "";
-    const lines = text
-      .split("\n")
-      .map(l => l.replace(/^\d+\.\s*/, "")) // remove numbering
-      .filter(l => l.trim() !== "");
+    let text = completion.choices[0].message.content || "";
 
-    return NextResponse.json({ titles: lines });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: "Failed to generate titles." }, { status: 500 });
+    // Split into lines & clean each title
+    const titles = text
+      .split("\n")
+      .map(t => t
+        .trim()
+        .replace(/^\d+\.\s*/, "")   // remove numbering
+        .replace(/["'.,:;!?-]/g, "") // remove ALL punctuation
+        .replace(/\s+/g, " ")         // collapse extra spaces
+        .trim()
+      )
+      .filter(t => t.length > 0)
+      .slice(0, 5); // ensure max 5
+
+    return NextResponse.json({ titles });
+
+  } catch (err: any) {
+    console.error("Title generation error:", err);
+    return NextResponse.json(
+      { error: "Failed to generate titles." },
+      { status: 500 }
+    );
   }
 }

@@ -1,3 +1,4 @@
+// Nonprofit page with body background gradient applied only on this page
 "use client";
 import { useState, useEffect } from "react";
 
@@ -11,7 +12,16 @@ export default function NonprofitLookupPage() {
   const [loadingBadge, setLoadingBadge] = useState(false);
   const [badgeUrl, setBadgeUrl] = useState<string | null>(null);
 
-  // Autocomplete lookup
+  // Apply page-only background
+  useEffect(() => {
+    document.body.style.background = "#FFF8F0";
+
+    return () => {
+      document.body.style.background = "";
+    };
+  }, []);
+
+  // Autocomplete search
   useEffect(() => {
     if (query.length < 2) {
       setSuggestions([]);
@@ -51,7 +61,6 @@ export default function NonprofitLookupPage() {
     setSelected(selected.filter((o) => o.ein !== ein));
   }
 
-  // Title generation
   async function submitToGPT() {
     setLoadingGPT(true);
     setTitles([]);
@@ -65,6 +74,7 @@ export default function NonprofitLookupPage() {
       });
 
       const data = await res.json();
+
       if (data.error) setError(data.error);
       else setTitles(data.titles);
     } catch (err) {
@@ -75,21 +85,17 @@ export default function NonprofitLookupPage() {
     setLoadingGPT(false);
   }
 
-  const chosenTitle =
-    titles.find((t) => t.startsWith("✔ "))?.replace(/^✔ /, "");
+  const chosenTitle = titles.find((t) => t.startsWith("✔ "))?.replace(/^✔ /, "");
 
-  // Badge + Render
   async function generateBadge() {
     if (!chosenTitle || loadingBadge) return;
 
     setLoadingBadge(true);
     setError("");
 
-    try {
-      // Save title
-      sessionStorage.setItem("badgeTitle", chosenTitle);
+    sessionStorage.setItem("badgeTitle", chosenTitle);
 
-      // Generate badge image
+    try {
       const badgeRes = await fetch("/api/badge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -97,18 +103,14 @@ export default function NonprofitLookupPage() {
       });
 
       const badgeData = await badgeRes.json();
-      if (!badgeData.imageBase64) throw new Error("No image returned");
+      if (!badgeData.imageBase64) throw new Error("No imageBase64 returned");
 
       const dataUrl = `data:image/png;base64,${badgeData.imageBase64}`;
       setBadgeUrl(dataUrl);
 
-      sessionStorage.setItem("badgeImageUrl", dataUrl);
+      sessionStorage.setItem("badgeImageUrl", badgeData.imageUrl);
 
-      // Render Page (safe: no base64)
-      const nonprofits = selected.map((n) => ({
-        name: n.name,
-        ein: n.ein
-      }));
+      const nonprofits = selected.map((n) => ({ name: n.name, ein: n.ein }));
 
       const pageRes = await fetch("/api/render-page", {
         method: "POST",
@@ -119,15 +121,8 @@ export default function NonprofitLookupPage() {
       const pageData = await pageRes.json();
       if (!pageData.html) throw new Error("No HTML returned");
 
-      // Save render
       sessionStorage.setItem("badgeHTML", pageData.html);
 
-      // Save gradient colors
-      sessionStorage.setItem("g1", pageData.g1);
-      sessionStorage.setItem("g2", pageData.g2);
-      sessionStorage.setItem("g3", pageData.g3);
-
-      // Navigate
       window.location.href = "/badge-result";
     } catch (err) {
       console.error(err);
@@ -138,17 +133,16 @@ export default function NonprofitLookupPage() {
   }
 
   return (
-    <main className="p-10 max-w-xl mx-auto space-y-6">
+    <main className="p-10 max-w-xl mx-auto space-y-6 text-black">
       <h1 className="text-3xl font-bold">Select Up to 5 Nonprofits</h1>
 
-      {/* Search */}
       <div className="relative">
         <input
           type="text"
-          value={query}
+          value={query || ""}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by nonprofit name"
-          className="border p-3 rounded w-full"
+          className="border p-3 rounded w-full text-black bg-white/70 backdrop-blur"
         />
 
         {suggestions.length > 0 && (
@@ -166,12 +160,11 @@ export default function NonprofitLookupPage() {
         )}
       </div>
 
-      {/* Selected nonprofits */}
       <div className="space-y-2 text-black">
         {selected.map((org) => (
           <div
             key={org.ein}
-            className="flex justify-between items-center border bg-gray-50 p-3 rounded"
+            className="flex justify-between items-center border bg-white/60 backdrop-blur p-3 rounded"
           >
             <span>{org.name}</span>
             <button
@@ -182,33 +175,26 @@ export default function NonprofitLookupPage() {
             </button>
           </div>
         ))}
+        {selected.length === 0 && <p className="text-gray-700">No nonprofits selected yet.</p>}
       </div>
 
-      {/* Title Generator */}
       <button
         onClick={submitToGPT}
         disabled={selected.length === 0 || loadingGPT}
         className="px-5 py-3 bg-black text-white rounded disabled:opacity-50"
       >
-        {loadingGPT ? "Generating titles..." : "Generate Titles"}
+        {loadingGPT ? "Generating titles..." : "Create Title"}
       </button>
 
-      {/* Title List */}
       {titles.length > 0 && (
-        <div className="bg-gray-50 p-4 rounded border space-y-2">
+        <div className="bg-white/60 backdrop-blur p-4 rounded border space-y-2">
           <ul className="space-y-2">
             {titles.map((t, idx) => (
               <li
                 key={idx}
                 onClick={() =>
                   setTitles((prev) =>
-                    prev.map((item, i) =>
-                      i === idx
-                        ? item.startsWith("✔ ")
-                          ? item.replace(/^✔ /, "")
-                          : "✔ " + item
-                        : item.replace(/^✔ /, "")
-                    )
+                    prev.map((item, i) => (i === idx ? "✔ " + item.replace(/^✔ /, "") : item.replace(/^✔ /, "")))
                   )
                 }
                 className="p-2 cursor-pointer rounded hover:bg-gray-200 text-black"
@@ -220,7 +206,6 @@ export default function NonprofitLookupPage() {
         </div>
       )}
 
-      {/* Generate Badge */}
       {titles.length > 0 && (
         <button
           onClick={generateBadge}
@@ -230,15 +215,14 @@ export default function NonprofitLookupPage() {
           {loadingBadge ? (
             <>
               <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"></span>
-              Generating badge...
+              Generating badge, this will take a minute...
             </>
           ) : (
-            "Generate Badge Image"
+            "Generate Badge"
           )}
         </button>
       )}
 
-      {/* Debug Preview */}
       {badgeUrl && (
         <div className="mt-4">
           <img src={badgeUrl} alt="Generated badge" className="rounded border" />

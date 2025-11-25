@@ -37,7 +37,7 @@ export default function BadgeResultPage() {
     setG3(sessionStorage.getItem("g3"));
   }, []);
 
-  // Inject dynamic image + title into AI HTML
+  // Inject image + title into AI-rendered HTML
   useEffect(() => {
     if (!html || !imageUrl) return;
 
@@ -48,8 +48,28 @@ export default function BadgeResultPage() {
     if (h1 && title) {
       h1.textContent = title;
       h1.classList.add("font-poppins");
+      h1.style.textShadow = "0 2px 3px rgba(0,0,0,0.35)";
+      h1.style.color = "#ffffff";
     }
+
+    // General body text enhancements
+    const bodyNodes = document.querySelectorAll("p, span, div, h2");
+    bodyNodes.forEach((el) => {
+      (el as HTMLElement).style.color = "#ffffff";
+      (el as HTMLElement).style.textShadow = "0 1px 2px rgba(0,0,0,0.35)";
+    });
+
+    // 🔥 Make nonprofit list items larger
+    const nonprofitItems = document.querySelectorAll("li");
+    nonprofitItems.forEach((el) => {
+      (el as HTMLElement).style.color = "#ffffff";
+      (el as HTMLElement).style.textShadow = "0 1px 2px rgba(0,0,0,0.35)";
+      (el as HTMLElement).style.fontSize = "1.4rem"; // larger
+      (el as HTMLElement).style.fontWeight = "600";
+    });
+
   }, [html, imageUrl, title]);
+
 
   if (!html) {
     return <main className="min-h-screen w-full"></main>;
@@ -59,7 +79,7 @@ export default function BadgeResultPage() {
     <main
       className="min-h-screen p-0 m-0 w-full font-nunito"
       style={{
-        background: g1 && g2 && g3 ? `linear-gradient(to bottom, ${g1}, ${g2}, ${g3})` : "#ffffff"
+        background: g1 && g2 && g3 ? `linear-gradient(to bottom, ${g1}, ${g2}, ${g3})` : "#222222"
       }}
     >
       <div
