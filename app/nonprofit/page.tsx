@@ -138,7 +138,7 @@ export default function NonprofitLookupPage() {
 
   return (
     <main className="p-10 max-w-xl mx-auto space-y-6 text-black">
-      <h1 className="text-3xl font-bold">Select Up to 5 Nonprofits</h1>
+      <h1 className="text-3xl font-bold">Select Up to 5 Non-profits</h1>
 
       <div className="relative">
         <input

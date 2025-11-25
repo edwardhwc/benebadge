@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     const prompt = `
-      Create 5 fun titles for someone who donates to these non-profits:
+      Create 5 fun titles for a single person who donates to these non-profits:
       ${nonprofits.join(", ")}.
 
       RULES:
