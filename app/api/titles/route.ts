@@ -18,11 +18,11 @@ export async function POST(req: Request) {
 
     const prompt = `
       Create 5 fun titles for a single person who donates to these non-profits:
-      ${nonprofits.join(", ")}.  Include a word that involves each non profit.
+      ${nonprofits.join(", ")}.  In the title include a word that represents each non-profit.
 
       RULES:
       - No punctuation (NO quotes, commas, dashes, or colons).
-      - Titles must be short (2–6 words).
+      - Titles must be max of 8 words.
       - No explanations, just the list.
       - No numbering.
       - Each title must be unique.
