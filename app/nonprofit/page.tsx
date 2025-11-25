@@ -105,10 +105,7 @@ export default function NonprofitLookupPage() {
       const badgeData = await badgeRes.json();
       if (!badgeData.imageBase64) throw new Error("No imageBase64 returned");
 
-      const dataUrl = `data:image/png;base64,${badgeData.imageBase64}`;
-      setBadgeUrl(dataUrl);
-
-      sessionStorage.setItem("badgeImageUrl", dataUrl);
+      sessionStorage.setItem("badgeImageUrl", badgeData.imageUrl);
 
       const nonprofits = selected.map((n) => ({ name: n.name, ein: n.ein }));
 
@@ -138,7 +135,8 @@ export default function NonprofitLookupPage() {
 
   return (
     <main className="p-10 max-w-xl mx-auto space-y-6 text-black">
-      <h1 className="text-3xl font-bold">Select Up to 5 Non-profits</h1>
+      <p>Welcome to GoodBadge.  This was made so that you can share what nonprofits that you donate to, volunteer at, or just care about.  Take a screenshot at the end and share on your favorite platform.  Feel free to tag @goodbadgeorg!</p>
+      <h1 className="text-3xl font-bold">Select Up to 5 nonprofits</h1>
 
       <div className="relative">
         <input

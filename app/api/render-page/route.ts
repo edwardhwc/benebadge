@@ -62,7 +62,7 @@ Generate:
 - cardHtml: the middle card markup:
 
 <div>
-  <h2 style = "font-size: .8em; padding-bottom: 10px;">I support these Non-profits:</h2>
+  <h2 style = "font-size: .8em; padding-bottom: 10px;">I support these nonprofits:</h2>
   <ul>
     ${npList}
   </ul>

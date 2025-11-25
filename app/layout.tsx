@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Benevolent Badge",
+  title: "Good Badge",
   description: "Share your non profit interests",
 };
 
