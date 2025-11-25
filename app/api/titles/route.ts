@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     const prompt = `
-      Create 5 creative, fun, uplifting honorary titles inspired by donations to:
+      Create 5 fun titles for someone who donates to:
       ${nonprofits.join(", ")}.
 
       RULES:

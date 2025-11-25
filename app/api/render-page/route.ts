@@ -62,7 +62,7 @@ Generate:
 - cardHtml: the middle card markup:
 
 <div>
-  <h2>Supported Nonprofits</h2>
+  <h2>Supported Nonprofits:</h2>
   <ul>
     ${npList}
   </ul>
@@ -100,7 +100,7 @@ NO other fields.
   <h1 style="
     margin-top: 1.5rem;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: 800;
     font-family: 'Poppins', sans-serif;
     color: ${textColor};

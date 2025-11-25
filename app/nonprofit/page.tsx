@@ -44,7 +44,7 @@ export default function NonprofitLookupPage() {
 
   function selectNonprofit(org: any) {
     if (selected.length >= 5) {
-      setError("You can select up to 5 nonprofits.");
+      setError("You can select up to 5 nonprofits that you support.");
       return;
     }
     if (selected.find((o) => o.ein === org.ein)) {
