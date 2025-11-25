@@ -62,7 +62,7 @@ Generate:
 - cardHtml: the middle card markup:
 
 <div>
-  <h2>I support these Non-profits:</h2>
+  <h2 style = "font-size: .8em">I support these Non-profits:</h2>
   <ul>
     ${npList}
   </ul>
