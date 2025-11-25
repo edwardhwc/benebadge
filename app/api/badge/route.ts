@@ -19,6 +19,7 @@ export async function POST(req: Request) {
 Create a circular badge illustration with:
 - colorful, fun style
 - NO text anywhere
+- NO person in the image
 This badge represents the honorary title: "${title}"
 `;
 

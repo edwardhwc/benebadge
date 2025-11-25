@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
     const prompt = `
       Create 5 fun titles for a single person who donates to these non-profits:
-      ${nonprofits.join(", ")}.
+      ${nonprofits.join(", ")}.  Include a word that involves each non profit.
 
       RULES:
       - No punctuation (NO quotes, commas, dashes, or colons).
