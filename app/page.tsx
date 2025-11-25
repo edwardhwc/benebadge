@@ -135,7 +135,7 @@ export default function NonprofitLookupPage() {
 
   return (
     <main className="p-10 max-w-xl mx-auto space-y-6 text-black">
-      <p>Welcome to GoodBadge.  This was made so that you can share what nonprofits that you donate to, volunteer at, or just care about.  Take a screenshot at the end and share on your favorite platform.  Feel free to tag @goodbadgeorg!</p>
+      <p>Welcome to Good Badger.  This was made so that you can share what nonprofits that you donate to, volunteer at, or just care about.  Take a screenshot at the end and share on your favorite platform.  Feel free to tag @good.badgerorg!</p>
       <h1 className="text-3xl font-bold">Select Up to 5 nonprofits</h1>
 
       <div className="relative">

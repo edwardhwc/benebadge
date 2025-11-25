@@ -13,10 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Good Badge",
+  title: "Good Badger",
   description: "Share your non profit interests",
   icons: {
-    icon: "/favicon.svg",       // <- SVG Favicon
+    icon: [
+      {
+        url: "/badger.ico",
+        sizes: "any",
+      },
+    ],
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+      },
+    ],
   },
 };
 
