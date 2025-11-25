@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Good Badge",
   description: "Share your non profit interests",
+  icons: {
+    icon: "/favicon.svg",       // <- SVG Favicon
+  },
 };
 
 export default function RootLayout({
