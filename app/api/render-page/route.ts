@@ -94,7 +94,7 @@ NO other fields.
     const finalHTML = `
 <main class="w-full p-10">
   <img id="badge-image"
-       class="w-64 h-64 rounded-full shadow-2xl mx-auto border-4 bg-white/80"
+       class="w-48 h-48 rounded-full shadow-2xl mx-auto border-4 bg-white/80"
        style="box-shadow: 0 4px 20px rgba(0,0,0,0.25);" />
 
   <h1 style="

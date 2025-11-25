@@ -86,6 +86,9 @@ export default function BadgeResultPage() {
         className="w-full max-w-2xl mx-auto p-6"
         dangerouslySetInnerHTML={{ __html: html }}
       />
+      <p className="text-center mt-6 text-sm opacity-90">
+        Made at: goodbadger.org
+      </p>
     </main>
   );
 }
