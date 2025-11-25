@@ -64,7 +64,7 @@ export default function BadgeResultPage() {
     nonprofitItems.forEach((el) => {
       (el as HTMLElement).style.color = "#ffffff";
       (el as HTMLElement).style.textShadow = "0 1px 2px rgba(0,0,0,0.35)";
-      (el as HTMLElement).style.fontSize = "1.0 rem"; // larger
+      (el as HTMLElement).style.fontSize = "0.7 rem"; // larger
       (el as HTMLElement).style.fontWeight = "600";
     });
 

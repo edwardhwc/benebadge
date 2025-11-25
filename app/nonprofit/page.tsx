@@ -122,6 +122,9 @@ export default function NonprofitLookupPage() {
       if (!pageData.html) throw new Error("No HTML returned");
 
       sessionStorage.setItem("badgeHTML", pageData.html);
+      sessionStorage.setItem("g1", pageData.g1);
+      sessionStorage.setItem("g2", pageData.g2);
+      sessionStorage.setItem("g3", pageData.g3);
 
       window.location.href = "/badge-result";
     } catch (err) {

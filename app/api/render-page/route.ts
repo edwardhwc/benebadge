@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     }
 
     const npList = nonprofits
-      .map((np: any) => `<li style="font-size: 1.125rem; margin-bottom: 0.25rem;">${np.name}</li>`)
+      .map((np: any) => `<li style="font-size: 0.8rem; margin-bottom: 0.25rem;">${np.name}</li>`)
       .join("");
 
     const prompt = `
@@ -98,9 +98,9 @@ NO other fields.
        style="box-shadow: 0 4px 20px rgba(0,0,0,0.25);" />
 
   <h1 style="
-    margin-top: 1.5rem;
+    margin-top: 1.2rem;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     font-weight: 800;
     font-family: 'Poppins', sans-serif;
     color: ${textColor};
