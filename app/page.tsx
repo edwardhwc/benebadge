@@ -134,7 +134,7 @@ export default function NonprofitLookupPage() {
       <p className="text-sm sm:text-sm">
         Welcome to Good Badger. This was made so that you can share which nonprofits you donate to,
         volunteer at, or just care about. Take a screenshot at the end and share on your favorite
-        platform. Tag @good.badgerorg!
+        platform. Tag @goodbadger_org!
       </p>
 
       <h1 className="text-xl sm:text-2xl font-bold">
