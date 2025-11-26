@@ -130,8 +130,8 @@ export default function NonprofitLookupPage() {
 
   return (
     <main className="min-h-screen w-full flex justify-center items-start p-4 pt-16 sm:pt-20">
-      <div className="w-full max-w-md sm:max-w-xl bg-white/80 backdrop-blur-xl shadow-lg rounded-2xl p-6 sm:p-10 border border-gray-200 space-y-6">
-      <p className="text-xs sm:text-sm">
+      <div className="w-full max-w-[18rem] xs:max-w-sm sm:max-w-md bg-white/80 backdrop-blur-xl shadow-lg rounded-2xl p-6 sm:p-10 border border-gray-200 space-y-6">
+      <p className="text-sm sm:text-sm">
         Welcome to Good Badger. This was made so that you can share which nonprofits you donate to,
         volunteer at, or just care about. Take a screenshot at the end and share on your favorite
         platform. Tag @good.badgerorg!
